@@ -1,0 +1,2 @@
+dulwich:
+  - pip.installed

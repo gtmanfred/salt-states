@@ -1,0 +1,9 @@
+[epel-testing]
+name=Extra Packages for Enterprise Linux 6 - Testing - $basearch
+#baseurl=http://download.fedoraproject.org/pub/epel/testing/6/$basearch
+mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=testing-epel6&arch=$basearch
+failovermethod=priority
+enabled=0
+protect=0
+gpgcheck=1
+gpgkey=file:///etc/yum.repos.d/epel.repo.key
