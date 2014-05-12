@@ -1,25 +1,10 @@
-remove-volume:
-  cmd.run:
-    - name: gluster volume stop work <<< Y
-    - onlyif: gluster volume status work
-
-stop-volume:
-  cmd.run:
-    - name: gluster volume delete work force
-    - require:
-      - cmd: remove-volume
-
 unmount-volume:
   service.dead:
     - name: glusterfs-server
-    - enabled: False
-    - require:
-      - cmd: stop-volume
+    - enable: False
   
   mount.unmounted:
     - name: /srv/gluster
-    - require:
-      - cmd: stop-volume
 
   lvm.vg_absent:
     - name: vglocal00
