@@ -1,6 +1,6 @@
 remove-volume:
   cmd.run:
-    - name: gluster volume stop work force
+    - name: gluster volume stop work <<< Y
     - onlyif: gluster volume status work
 
 stop-volume:
