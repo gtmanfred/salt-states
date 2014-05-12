@@ -78,6 +78,14 @@ volume-group:
       - pkg: glusterfs-server
 {% endif %}
 
+{%- if grains['os_family'] == 'Debian' %}
+  service.running:
+    - name: glusterfs-server
+    - enable: True
+    - requre:
+      - pkg: glusterfs-server
+{% endif %}
+
 final-directory:
   lvm.lv_present:
     - name: gluster
