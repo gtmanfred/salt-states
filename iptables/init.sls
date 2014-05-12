@@ -59,3 +59,8 @@ last:
     - chain: INPUT
     - jump: DROP
     - order: last
+
+{%- if 'gluster' in grains['localhost'] %}
+include:
+  - .gluster
+{% endif %}
