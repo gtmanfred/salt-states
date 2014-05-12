@@ -5,7 +5,7 @@ initial-accept:
     - chain: INPUT
     - match: state
     - connstate: RELATED,ESTABLISHED
-    - j: ACCEPT
+    - jump: ACCEPT
     - order: 1
 
 # -A INPUT -p icmp -j ACCEPT
@@ -15,15 +15,15 @@ icmp:
     - chain: INPUT
     - proto: icmp
     - icmp-type: '0'
-    - j: ACCEPT
+    - jump: ACCEPT
 
 # -A INPUT -i lo -j ACCEPT
 loopback:
   iptables.append:
     - table: filter
     - chain: INPUT
-    - i: lo
-    - j: ACCEPT
+    - in-interface: lo
+    - jump: ACCEPT
 
 ssh:
   iptables.append:
@@ -33,7 +33,7 @@ ssh:
     - connstate: NEW
     - proto: tcp
     - dport: 22
-    - j: ACCEPT
+    - jump: ACCEPT
 
 input:
   iptables.set_policy:
@@ -47,27 +47,15 @@ forward:
     - chain: FORWARD
     - policy: ACCEPT
 
+output:
+  iptables.set_policy:
+    - table: filter
+    - chain: OUTPUT
+    - policy: ACCEPT
+
 last:
   iptables.append:
     - table: filter
     - chain: INPUT
-    - j: DROP
+    - jump: DROP
     - order: last
-  
-
-dante-fw:
-  iptables.insert:
-    - position: 1
-    - table: filter
-    - chain: INPUT
-    - match:
-      - state
-      - comment
-    - comment: "Allow Socks5 connections to dante"
-    - j: ACCEPT
-    - connstate: NEW,ESTABLISHED
-    - dport: 1080
-    - proto: tcp
-    - save: True
-
-
