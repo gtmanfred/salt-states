@@ -9,7 +9,7 @@ stop-volume:
     - require:
       - cmd: remove-volume
 
-detach-volume:
+unmount-volume:
   service.dead:
     - name: glusterfs-server
     - enabled: False
@@ -19,22 +19,28 @@ detach-volume:
   mount.unmounted:
     - name: /srv/gluster
     - require:
-      - cmd: remove-volume
+      - cmd: stop-volume
 
-  lvm.pv_absent:
-    - name: /dev/xvdb
+  lvm.vg_absent:
+    - name: vglocal00
     - require:
       - mount: /srv/gluster
 
-  cloud.volume_detached:
-    - provider: my-nova
-    - name: {{ grains['localhost'] }}-volume
+detach-volume:
+  lvm.pv_absent:
+    - name: /dev/xvdb
     - require:
-      - lvm: /dev/xvdb
+      - mount: unmount-volume
 
-delete-volume:
-  cloud.volume_absent:
-    - provider: my-nova
-    - name: {{ grains['localhost'] }}-volume
-    - require:
-      - cloud: detach-volume
+#  cloud.volume_detached:
+#    - provider: my-nova
+#    - name: {{ grains['localhost'] }}-volume
+#    - require:
+#      - lvm: /dev/xvdb
+#
+#delete-volume:
+#  cloud.volume_absent:
+#    - provider: my-nova
+#    - name: {{ grains['localhost'] }}-volume
+#    - require:
+#      - cloud: detach-volume
