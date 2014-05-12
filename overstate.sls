@@ -1,21 +1,21 @@
-saltmaster:
-  match: 'salt-master'
-  sls:
-    - cloud.package
+#saltmaster:
+#  match: 'salt*'
+#  sls:
+#    - cloud.gluster
 
-cloudinfo:
-  match: '*'
-  sls:
-    - cloud.apache-libcloud
+highstate-gluster:
+  match: '*gluster.gtmanfred.com'
+#  require:
+#    - saltmaster
 
-build:
-  match: '*package.gtmanfred.com'
+create-cluster:
+  match: 'G@gluster:master'
+  sls:
+    - gluster.master
   require:
-    - saltmaster
+    - highstate-gluster
 
-delete:
-  match: 'dunst.package.gtmanfred.com'
+highstate-mount:
+  match: 'mount*'
   require:
-    - build
-  sls:
-    - cloud.destroypackage
+    - create-cluster
