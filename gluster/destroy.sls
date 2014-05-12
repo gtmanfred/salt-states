@@ -17,15 +17,15 @@ detach-volume:
     - require:
       - mount: unmount-volume
 
-#  cloud.volume_detached:
-#    - provider: my-nova
-#    - name: {{ grains['localhost'] }}-volume
-#    - require:
-#      - lvm: /dev/xvdb
-#
-#delete-volume:
-#  cloud.volume_absent:
-#    - provider: my-nova
-#    - name: {{ grains['localhost'] }}-volume
-#    - require:
-#      - cloud: detach-volume
+  cloud.volume_detached:
+    - provider: my-nova
+    - name: {{ grains['localhost'] }}-volume
+    - require:
+      - lvm: /dev/xvdb
+
+delete-volume:
+  cloud.volume_absent:
+    - provider: my-nova
+    - name: {{ grains['localhost'] }}-volume
+    - require:
+      - cloud: detach-volume
