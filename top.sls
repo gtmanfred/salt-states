@@ -1,11 +1,11 @@
 base:
-#  'os_family:RedHat':
-#    - match: grain
-#    - vim
-#  'os_family:Debian':
-#    - match: grain
-#    - base
-#    - hosts
+  'os_family:RedHat':
+    - match: grain
+    - vim
+  'os_family:Debian':
+    - match: grain
+    - base
+    - hosts
   'db*':
     - mysql.server
     - mysql.client
