@@ -6,7 +6,7 @@ base:
     - match: grain
     - base
     - hosts
-    - iptables
+    #- iptables
   'db*':
     - mysql.server
     - mysql.client
