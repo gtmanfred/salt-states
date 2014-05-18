@@ -1,4 +1,4 @@
-{%- set info = salt['cloud.query']('list_nodes')['my-nova']['nova'] %}
+{%- set info = salt['publish.publish']('*', 'network.ip_addrs') %}
 
 {%- if info is defined %}
 
@@ -8,7 +8,7 @@
 {%- set short_name = name.split('.') | first %}
 {{ name }}-host-entry-cloud:
   host.present:
-    - ip: {{ interfaces['private_ips'][0] }}
+    - ip: {{ interfaces[0] }}
     - names:
       - {{ name }}
 {%- if short_name != name and salt['pillar.get']('hostsfile:generate_shortname', True) %}
