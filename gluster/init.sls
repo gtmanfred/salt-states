@@ -14,7 +14,7 @@ initial:
 {% endif %}
     - require_in:
 {%- if grains['os_family'] == 'Debian' %}
-      - pkgrepo: semiosis/ubuntu-glusterfs-3.4
+      - pkgrepo: semiosis/ubuntu-glusterfs-3.5
 {% endif %}
       - blockdev: /dev/vglocal00/gluster
       - pip: rackspace-novaclient
@@ -55,7 +55,7 @@ volume-group:
 
 {%- if grains['os_family'] == 'Debian' %}
   pkgrepo.managed:
-    - ppa: semiosis/ubuntu-glusterfs-3.4
+    - ppa: semiosis/ubuntu-glusterfs-3.5
 {% endif %}
 {%- if grains['os_family'] == 'RedHat' %}
   file.managed:

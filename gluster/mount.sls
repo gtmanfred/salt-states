@@ -6,13 +6,13 @@ mountpkgs:
       - python-software-properties
       - python-pycurl
     - require_in:
-      - pkgrepo: semiosis/ubuntu-glusterfs-3.4
+      - pkgrepo: semiosis/ubuntu-glusterfs-3.5
 {% endif %}
   
 gluster-pkgs:
 {%- if grains['os_family'] == 'Debian' %}
   pkgrepo.managed:
-    - ppa: semiosis/ubuntu-glusterfs-3.4
+    - ppa: semiosis/ubuntu-glusterfs-3.5
     - require_in:
       - pkg: glusterfs-client
 
