@@ -25,7 +25,7 @@ initial:
     - reload_modules: true
 
   cloud.volume_present:
-    - provider: my-nova
+    - provider: pillar-nova
     - name: {{ grains['id'] }}-volume
     - size: 100
     - voltype: SSD
@@ -36,7 +36,7 @@ attach-block-devices:
   cloud.volume_attached:
     - name: {{ grains['id'] }}-volume
     - server_name: {{ grains['id'] }}
-    - provider: my-nova
+    - provider: pillar-nova
     - device: /dev/xvdb
     - require_in:
       - lvm: /dev/xvdb
