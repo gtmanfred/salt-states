@@ -1,12 +1,14 @@
 git_novaclient:
   pkg.installed:
-    - name: git
+    - pkgs:
+      - git
+      - python-pip
 
   pip.installed:
     - name: novaclient
     - editable: git://github.com/openstack/python-novaclient.git#egg=novaclient
     - require:
-      - pkg: git
+      - pkg: git_novaclient
 
 rackspace-novaclient:
   pip.installed:
