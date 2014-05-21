@@ -18,14 +18,14 @@ detach-volume:
       - mount: unmount-volume
 
   cloud.volume_detached:
-    - provider: my-nova
+    - provider: pillar-nova
     - name: {{ grains['localhost'] }}-volume
     - require:
       - lvm: /dev/xvdb
 
 delete-volume:
   cloud.volume_absent:
-    - provider: my-nova
+    - provider: pillar-nova
     - name: {{ grains['localhost'] }}-volume
     - require:
       - cloud: detach-volume
