@@ -3,6 +3,7 @@ git_novaclient:
     - pkgs:
       - git
       - python-pip
+      - sshpass
 
   pip.installed:
     - name: novaclient
