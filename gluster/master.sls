@@ -17,19 +17,17 @@ cluster-peers:
 gluster-created:
   glusterfs.created:
     - name: work
-    - brick: /srv/gluster/drive1
-    - replica: True
-    - count: 2
-    - short: True
-    - peers:
-      - one
-      - two
-      - three
-      - four
-      - five
-      - six
-      - seven
-      - eight
+    - bricks:
+       - one:/srv/gluster/drive1
+       - two:/srv/gluster/drive1
+       - three:/srv/gluster/drive1
+       - four:/srv/gluster/drive1
+       - five:/srv/gluster/drive1
+       - six:/srv/gluster/drive1
+       - seven:/srv/gluster/drive1
+       - eight:/srv/gluster/drive1
+    - replica: 2
+    - start: True
 
 gluster-started:
   glusterfs.started:
