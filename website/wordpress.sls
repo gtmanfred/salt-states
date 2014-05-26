@@ -3,7 +3,7 @@ wordpress:
     - extracted
     - name: /srv/
     - source: http://wordpress.org/wordpress-{{ pillar['wordpress']['wp-version'] }}.tar.gz
-    - source_hash: md5=d0b0396e84942faf87ccde819df0916f
+    - source_hash: md5={{ pillar['wordpress']['wp-hash'] }}
     - archive_format: tar
     - if_missing: /srv/wordpress/
 
