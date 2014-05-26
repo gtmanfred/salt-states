@@ -16,13 +16,13 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', '{{ salt['pillar.get']('mysql:wordpress:database', 'wordpress') }}');
+define('DB_NAME', '{{ salt['pillar.get']('website:wordpress:database', 'wordpress') }}');
 
 /** MySQL database username */
-define('DB_USER', '{{ salt['pillar.get']('mysql:wordpress:user', 'wordpress') }}');
+define('DB_USER', '{{ salt['pillar.get']('website:wordpress:user', 'wordpress') }}');
 
 /** MySQL database password */
-define('DB_PASSWORD', '{{ salt['pillar.get']('mysql:wordpress:password', '') }}');
+define('DB_PASSWORD', '{{ salt['pillar.get']('website:wordpress:password', '') }}');
 
 /** MySQL hostname */
 define('DB_HOST', '{{ addr }}');
