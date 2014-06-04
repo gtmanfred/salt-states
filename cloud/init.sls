@@ -1,4 +1,4 @@
 include:
-  - cloud.db1
-  - cloud.redis1
-  - cloud.web1
+  - .db1
+  - .redis1
+  - .web1

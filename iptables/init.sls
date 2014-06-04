@@ -1,39 +1,35 @@
 # -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 initial-accept:
   iptables.append:
-    - table: filter
-    - chain: INPUT
+    - &defaults 
+        - table: filter
+        - chain: INPUT
+        - jump: ACCEPT
+    - <<: *defaults
     - match: state
     - connstate: RELATED,ESTABLISHED
-    - jump: ACCEPT
     - order: 1
 
 # -A INPUT -p icmp -j ACCEPT
 icmp:
   iptables.append:
-    - table: filter
-    - chain: INPUT
+    - <<: *defaults
     - proto: icmp
     - icmp-type: '0'
-    - jump: ACCEPT
 
 # -A INPUT -i lo -j ACCEPT
 loopback:
   iptables.append:
-    - table: filter
-    - chain: INPUT
+    - <<: *defaults
     - in-interface: lo
-    - jump: ACCEPT
 
 ssh:
   iptables.append:
-    - table: filter
-    - chain: INPUT
+    - <<: *defaults
     - match: state
     - connstate: NEW
     - proto: tcp
     - dport: 22
-    - jump: ACCEPT
 
 input:
   iptables.set_policy:

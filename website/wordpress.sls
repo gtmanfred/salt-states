@@ -25,12 +25,25 @@ wp-salt:
     - value: |
              {{ wp_salt|indent(13, false) }}
 
+/srv/wordpress:
+  file.directory:
+    - &userdata
+        - user: www-data
+        - group: www-data
+    - <<: *userdata
+    - dir_mode: 755
+    - file_mode: 644
+    - makedirs: True
+    - recurse:
+      - user
+      - group
+      - mode
+
 #{%- for name, addrlist in addrs.items() %}
 /srv/wordpress/wp-config.php:
   file:
     - managed
-    - user: www-data
-    - group: www-data
+    - <<: *userdata
     - mode: 644
     - source: salt://website/files/wp-config.php
     - template: jinja
@@ -43,15 +56,3 @@ wp-salt:
       - file: /srv/wordpress
 #{% endfor %}
 {% endif %}
-
-/srv/wordpress:
-  file.directory:
-    - user: www-data
-    - group: www-data
-    - dir_mode: 755
-    - file_mode: 644
-    - makedirs: True
-    - recurse:
-      - user
-      - group
-      - mode
