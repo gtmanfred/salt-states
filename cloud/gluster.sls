@@ -1,6 +1,6 @@
 build_profile:
   cloud.profile:
-    - profile: ubuntu-8
+    - profile: ubuntu-8-nova
     - names:
       - one.gluster.gtmanfred.com
       - two.gluster.gtmanfred.com
