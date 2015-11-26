@@ -1,2 +1,0 @@
-python-django:
-  pkg.installed
